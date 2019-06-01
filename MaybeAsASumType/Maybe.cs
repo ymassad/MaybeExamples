@@ -23,8 +23,6 @@ namespace MaybeAsASumType
         {
             public Some(T value) => Value = value;
             public T Value { get; }
-
-            public void Deconstruct(out T value) => value = Value;
         }
 
         public sealed class None : Maybe<T>
