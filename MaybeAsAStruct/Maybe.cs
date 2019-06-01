@@ -2,6 +2,23 @@
 
 namespace MaybeAsAStruct
 {
+    public static class Maybe
+    {
+        public class MaybeNone
+        {
+        }
+
+        public static MaybeNone None { get; } = new MaybeNone();
+
+        public static Maybe<T> Some<T>(T value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return value;
+        }
+    }
+
     public struct Maybe<T>
     {
         private readonly T value;
@@ -58,14 +75,5 @@ namespace MaybeAsAStruct
             value = default(T);
             return false;
         }
-    }
-
-    public static class Maybe
-    {
-        public class MaybeNone
-        {
-        }
-
-        public static MaybeNone None { get; } = new MaybeNone();
     }
 }
