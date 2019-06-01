@@ -7,6 +7,11 @@ namespace MaybeAsASumType
     {
         static void Main(string[] args)
         {
+
+        }
+
+        static void Test1()
+        {
             var contents = GetLogContents(1);
 
             if (contents is Maybe<string>.Some some)
@@ -17,7 +22,11 @@ namespace MaybeAsASumType
             {
                 Console.WriteLine("Log file not found");
             }
+        }
 
+        static void Test2()
+        {
+            var contents = GetLogContents(1);
 
             if (contents.TryGetValue(out var value))
             {
@@ -27,6 +36,20 @@ namespace MaybeAsASumType
             {
                 Console.WriteLine("Log file not found");
             }
+        }
+
+        static void Test3()
+        {
+            var contents = GetLogContents(1);
+
+            contents.Match(some: value => 
+            {
+                Console.WriteLine(value);
+            },
+            none: () =>
+            {
+                Console.WriteLine("Log file not found");
+            });
         }
 
         static Maybe<string> GetLogContents(int id)
