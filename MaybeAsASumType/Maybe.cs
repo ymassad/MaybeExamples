@@ -4,23 +4,6 @@ using System.Text;
 
 namespace MaybeAsASumType
 {
-    public static class Maybe
-    {
-        public class MaybeNone
-        {
-        }
-
-        public static MaybeNone None { get; } = new MaybeNone();
-
-        public static Maybe<T> Some<T>(T value)
-        {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
-
-            return new Maybe<T>.Some(value);
-        }
-    }
-
     public abstract class Maybe<T>
     {
         private Maybe()
@@ -80,6 +63,23 @@ namespace MaybeAsASumType
 
             value = default(T);
             return false;
+        }
+    }
+
+    public static class Maybe
+    {
+        public class MaybeNone
+        {
+        }
+
+        public static MaybeNone None { get; } = new MaybeNone();
+
+        public static Maybe<T> Some<T>(T value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return new Maybe<T>.Some(value);
         }
     }
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeAsASumType", "MaybeAsASumType\MaybeAsASumType.csproj", "{C175D6CA-4B0F-44A6-9258-29B96774E8C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaybeAsAStruct", "MaybeAsAStruct\MaybeAsAStruct.csproj", "{98158549-5996-4063-BB1F-4488C575D7F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaybeAsAStruct", "MaybeAsAStruct\MaybeAsAStruct.csproj", "{98158549-5996-4063-BB1F-4488C575D7F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

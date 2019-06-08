@@ -2,23 +2,6 @@
 
 namespace MaybeAsAStruct
 {
-    public static class Maybe
-    {
-        public class MaybeNone
-        {
-        }
-
-        public static MaybeNone None { get; } = new MaybeNone();
-
-        public static Maybe<T> Some<T>(T value)
-        {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
-
-            return value;
-        }
-    }
-
     public struct Maybe<T>
     {
         private readonly T value;
@@ -74,6 +57,81 @@ namespace MaybeAsAStruct
 
             value = default(T);
             return false;
+        }
+
+        public Maybe<TResult> Map<TResult>(Func<T, TResult> convert)
+        {
+            if(!hasValue)
+                return new Maybe<TResult>();
+
+            return convert(value);
+        }
+
+        public Maybe<TResult> Select<TResult>(Func<T, TResult> convert)
+        {
+            if (!hasValue)
+                return new Maybe<TResult>();
+
+            return convert(value);
+        }
+
+        public Maybe<TResult> Bind<TResult>(Func<T, Maybe<TResult>> convert)
+        {
+            if (!hasValue)
+                return new Maybe<TResult>();
+
+            return convert(value);
+        }
+
+        public Maybe<TResult> SelectMany<TResult>(Func<T, Maybe<TResult>> convert)
+        {
+            if (!hasValue)
+                return new Maybe<TResult>();
+
+            return convert(value);
+        }
+
+        public Maybe<TFinalResult> SelectMany<TResult, TFinalResult>(
+            Func<T, Maybe<TResult>> convert,
+            Func<T, TResult, TFinalResult> finalSelect)
+        {
+            if (!hasValue)
+                return new Maybe<TFinalResult>();
+
+            var converted = convert(value);
+
+            if (!converted.hasValue)
+                return new Maybe<TFinalResult>();
+
+            return finalSelect(value, converted.value);
+        }
+
+        public Maybe<T> Where(Func<T, bool> predicate)
+        {
+            if (!hasValue)
+                return new Maybe<T>();
+
+            if (predicate(value))
+                return this;
+
+            return new Maybe<T>();
+        }
+    }
+
+    public static class Maybe
+    {
+        public class MaybeNone
+        {
+        }
+
+        public static MaybeNone None { get; } = new MaybeNone();
+
+        public static Maybe<T> Some<T>(T value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return value;
         }
     }
 }
