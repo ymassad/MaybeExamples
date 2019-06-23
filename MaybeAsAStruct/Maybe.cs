@@ -83,9 +83,9 @@ namespace MaybeAsAStruct
             return convert(value);
         }
 
-        public Maybe<TResult> SelectMany<TIntermediate, TResult>(
-            Func<T, Maybe<TIntermediate>> convert,
-            Func<T, TIntermediate, TResult> finalSelect)
+        public Maybe<TResult> SelectMany<T2, TResult>(
+            Func<T, Maybe<T2>> convert,
+            Func<T, T2, TResult> finalSelect)
         {
             if (!hasValue)
                 return new Maybe<TResult>();
