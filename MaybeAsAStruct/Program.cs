@@ -73,6 +73,25 @@ namespace MaybeAsAStruct
                 select errorDescription;
         }
 
+        static void Test8()
+        {
+            var errorMessage =
+                GetErrorDescription(15)
+                    .ValueOr("Unknown error");
+        }
+
+        static void Test9()
+        {
+            var errorMessage =
+                GetErrorDescription(15)
+                    .ValueOr(() => GetDefaultErrorMessage());
+        }
+
+        static string GetDefaultErrorMessage()
+        {
+            return File.ReadAllText("c:\\defaultErrorMessage.txt");
+        }
+
         static Maybe<string> GetLogContents(int id)
         {
             var filename = "c:\\logs\\" + id + ".log";

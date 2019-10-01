@@ -108,6 +108,22 @@ namespace MaybeAsAStruct
 
             return new Maybe<T>();
         }
+
+        public T ValueOr(T defaultValue)
+        {
+            if (hasValue)
+                return value;
+
+            return defaultValue;
+        }
+
+        public T ValueOr(Func<T> defaultValueFactory)
+        {
+            if (hasValue)
+                return value;
+
+            return defaultValueFactory();
+        }
     }
 
     public static class Maybe
