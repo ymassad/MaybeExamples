@@ -87,6 +87,22 @@ namespace MaybeAsAStruct
                     .ValueOr(() => GetDefaultErrorMessage());
         }
 
+        static void Test10()
+        {
+            var errorMessage =
+                GetErrorDescription(15)
+                    .ValueOrMaybe(GetErrorDescriptionViaWebService(15))
+                    .ValueOr("Unknown error");
+        }
+
+        static void Test11()
+        {
+            var errorMessage =
+                GetErrorDescription(15)
+                    .ValueOrMaybe(() => GetErrorDescriptionViaWebService(15))
+                    .ValueOr("Unknown error");
+        }
+
         static string GetDefaultErrorMessage()
         {
             return File.ReadAllText("c:\\defaultErrorMessage.txt");
@@ -133,6 +149,12 @@ namespace MaybeAsAStruct
                 logLines
                     .FirstOrNone(x => x.StartsWith(linePrefix))
                     .Map(x => x.Substring(linePrefix.Length));
+        }
+
+        static Maybe<string> GetErrorDescriptionViaWebService(int errorCode)
+        {
+            //Real code would call a web service
+            return Maybe.None;
         }
     }
 }

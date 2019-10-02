@@ -124,6 +124,22 @@ namespace MaybeAsAStruct
 
             return defaultValueFactory();
         }
+
+        public Maybe<T> ValueOrMaybe(Maybe<T> alternativeValue)
+        {
+            if (hasValue)
+                return this;
+
+            return alternativeValue;
+        }
+
+        public Maybe<T> ValueOrMaybe(Func<Maybe<T>> alternativeValueFactory)
+        {
+            if (hasValue)
+                return this;
+
+            return alternativeValueFactory();
+        }
     }
 
     public static class Maybe
