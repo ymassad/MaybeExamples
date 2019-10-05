@@ -131,6 +131,18 @@ namespace MaybeAsAStruct
                     .ToList();
         }
 
+        static void Test16()
+        {
+            Maybe<string> logMaybe = Maybe.Some("entry9");
+
+            var list = new List<string>()
+            {
+                "entry1",
+                logMaybe.ToAddIfHasValue(),
+                "entry2"
+            };
+        }
+
         static string GetDefaultErrorMessage()
         {
             return File.ReadAllText("c:\\defaultErrorMessage.txt");

@@ -72,5 +72,28 @@ namespace MaybeAsAStruct
 
             return result;
         }
+
+        public static AddIfHasValue<T> ToAddIfHasValue<T>(this Maybe<T> maybe)
+        {
+            return new AddIfHasValue<T>(maybe);
+        }
+
+        public static void Add<T>(this ICollection<T> collection, AddIfHasValue<T> addIfHasValue)
+        {
+            if (addIfHasValue.Maybe.TryGetValue(out var value))
+            {
+                collection.Add(value);
+            }
+        }
+    }
+
+    public struct AddIfHasValue<T>
+    {
+        public Maybe<T> Maybe { get; }
+
+        public AddIfHasValue(Maybe<T> maybe)
+        {
+            Maybe = maybe;
+        }
     }
 }
