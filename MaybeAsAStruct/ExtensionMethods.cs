@@ -57,5 +57,20 @@ namespace MaybeAsAStruct
                     yield return value;
             }
         }
+
+        public static Maybe<IEnumerable<T>> IfAllHaveValues<T>(this IEnumerable<Maybe<T>> enumerable)
+        {
+            var result = new List<T>();
+
+            foreach (var maybe in enumerable)
+            {
+                if (!maybe.TryGetValue(out var value))
+                    return Maybe.None;
+
+                result.Add(value);
+            }
+
+            return result;
+        }
     }
 }

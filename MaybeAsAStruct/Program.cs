@@ -121,6 +121,16 @@ namespace MaybeAsAStruct
                     .ToList();
         }
 
+        static void Test15()
+        {
+            List<string> multipleLogContents =
+                Enumerable.Range(1, 20)
+                    .Select(x => GetLogContents(x))
+                    .IfAllHaveValues()
+                    .ValueOrThrow("Some logs are not available")
+                    .ToList();
+        }
+
         static string GetDefaultErrorMessage()
         {
             return File.ReadAllText("c:\\defaultErrorMessage.txt");
