@@ -140,6 +140,14 @@ namespace MaybeAsAStruct
 
             return alternativeValueFactory();
         }
+
+        public T ValueOrThrow(string errorMessage)
+        {
+            if (hasValue)
+                return value;
+
+            throw new Exception(errorMessage);
+        }
     }
 
     public static class Maybe

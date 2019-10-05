@@ -103,6 +103,13 @@ namespace MaybeAsAStruct
                     .ValueOr("Unknown error");
         }
 
+        static void Test12()
+        {
+            var logContents =
+                GetLogContents(1)
+                    .ValueOrThrow("Unable to get log contents");
+        }
+
         static string GetDefaultErrorMessage()
         {
             return File.ReadAllText("c:\\defaultErrorMessage.txt");
