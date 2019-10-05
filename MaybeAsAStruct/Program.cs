@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace MaybeAsAStruct
 {
@@ -108,6 +110,15 @@ namespace MaybeAsAStruct
             var logContents =
                 GetLogContents(1)
                     .ValueOrThrow("Unable to get log contents");
+        }
+
+        static void Test14()
+        {
+            List<string> multipleLogContents =
+                Enumerable.Range(1, 20)
+                    .Select(x => GetLogContents(x))
+                    .GetItemsWithValue()
+                    .ToList();
         }
 
         static string GetDefaultErrorMessage()

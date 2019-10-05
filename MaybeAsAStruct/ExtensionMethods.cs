@@ -48,5 +48,14 @@ namespace MaybeAsAStruct
         {
             return maybe.ValueOr(string.Empty);
         }
+
+        public static IEnumerable<T> GetItemsWithValue<T>(this IEnumerable<Maybe<T>> enumerable)
+        {
+            foreach (var maybe in enumerable)
+            {
+                if (maybe.TryGetValue(out var value))
+                    yield return value;
+            }
+        }
     }
 }
