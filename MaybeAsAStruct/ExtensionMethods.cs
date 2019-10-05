@@ -38,5 +38,15 @@ namespace MaybeAsAStruct
 
             return Maybe.None;
         }
+
+        public static T[] ValueOrEmptyArray<T>(this Maybe<T[]> maybe)
+        {
+            return maybe.ValueOr(Array.Empty<T>());
+        }
+
+        public static string ValueOrEmptyString(this Maybe<string> maybe)
+        {
+            return maybe.ValueOr(string.Empty);
+        }
     }
 }
